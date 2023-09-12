@@ -1,1 +1,108 @@
+/* Calendar Container Styles */
+.calendar-container {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Open Sans', sans-serif; /* Use Open Sans for body text */
+}
+
+/* Calendar Styles */
+#calendar {
+    width: 70%;
+    background-color: #fdfdfd;
+    border: 1px solid #e1e1e1;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif; /* Use Poppins for headings */
+}
+/* Event Card Styles */
+.event-card {
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-radius: 8px;
+}
+
+.event-card:hover {
+    background-color: #f0f0f0;
+}
+
+.event-card h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.event-card p {
+    font-size: 14px;
+    color: #777;
+}
+
+/* Event Details Styles */
+#event-details {
+    width: 28%;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #e1e1e1;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    display: none;
+}
+
+/* Close Button Styles */
+.close-button {
+    cursor: pointer;
+    float: right;
+    font-weight: bold;
+    font-size: 20px;
+    color: #333;
+}
+
+// Sample events data
+const events = [
+    { date: '2023-09-15', title: 'Event 1', description: 'Description of Event 1' },
+    { date: '2023-09-20', title: 'Event 2', description: 'Description of Event 2' },
+    // Add more events here
+];
+
+// Function to render events on the calendar
+function renderEvents() {
+    const calendar = document.getElementById('calendar');
+    
+    events.forEach(event => {
+        const eventCard = document.createElement('div');
+        eventCard.className = 'event-card';
+        eventCard.innerHTML = `
+            <h3>${event.title}</h3>
+            <p>Date: ${event.date}</p>
+        `;
+
+        eventCard.addEventListener('click', () => showEventDetails(event));
+        
+        calendar.appendChild(eventCard);
+    });
+}
+
+// Function to display event details
+function showEventDetails(event) {
+    const eventDetails = document.getElementById('event-details');
+    eventDetails.innerHTML = `
+        <span class="close-button" onclick="closeEventDetails()">&times;</span>
+        <h2>${event.title}</h2>
+        <p>Date: ${event.date}</p>
+        <p>Description: ${event.description}</p>
+    `;
+    eventDetails.style.display = 'block';
+}
+
+// Function to close event details
+function closeEventDetails() {
+    const eventDetails = document.getElementById('event-details');
+    eventDetails.style.display = 'none';
+}
+
+renderEvents();
 
